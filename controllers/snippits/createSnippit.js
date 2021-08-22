@@ -1,4 +1,4 @@
-const Snippit = require('../../models/snippit')
+const Snippit = require('models/snippit')
 
 module.exports = async (req, res, next) => {
   const { title, code, language } = req.body

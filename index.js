@@ -1,17 +1,18 @@
+require('module-alias/register')
+require('dotenv/config')
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 
-const getAllSnippits = require('./controllers/snippits/getAllSnippits')
-const getSnippit = require('./controllers/snippits/getSnippit')
-const createSnippit = require('./controllers/snippits/createSnippit')
-const updateSnippit = require('./controllers/snippits/updateSnippit')
-const deleteSnippit = require('./controllers/snippits/deleteSnippit')
+const getAllSnippits = require('controllers/snippits/getAllSnippits')
+const getSnippit = require('controllers/snippits/getSnippit')
+const createSnippit = require('controllers/snippits/createSnippit')
+const updateSnippit = require('controllers/snippits/updateSnippit')
+const deleteSnippit = require('controllers/snippits/deleteSnippit')
+const register = require('controllers/auth/register')
+const login = require('controllers/auth/login')
 
-const register = require('./controllers/auth/register')
-const login = require('./controllers/auth/login')
-
-const isAuthorized = require('./middleware/isAuthorized')
+const isAuthorized = require('middleware/isAuthorized')
 
 // API Application Instanciation
 const app = express()

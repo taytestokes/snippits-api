@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -r dotenv/config index.js"
+    "start": "nodemon -r index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,10 +17,17 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
+    "module-alias": "^2.2.2",
     "mongoose": "^5.13.7",
     "validator": "^13.6.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
+  },
+  "_moduleAliases": {
+    "controllers": "./controllers",
+    "middleware": "./middleware",
+    "models": "./models",
+    "utils": "./utils"
   }
 }
