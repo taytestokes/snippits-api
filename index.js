@@ -32,6 +32,15 @@ app.delete('/snippits/:snippitId', snippitController.deleteSnippit)
 app.post('/register', authController.register)
 app.post('/login', authController.login)
 
+// Default Error Handler
+app.use((error, req, res, next) => {
+  console.error({ defaultError: error })
+  res.status(error.statusCode || 500).json({
+    message: error.message || 'Sorry, something went wrong.',
+    data: error.data || 'No data provided.'
+  })
+})
+
 // API establishment and Database connection
 mongoose
   .connect(process.env.DATABASE_CONNECTION, {

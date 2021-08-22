@@ -2,6 +2,7 @@ const Snippit = require('../models/snippit')
 
 // Create Snippits
 exports.createSnippit = async (_, res) => {
+  // TODO: Update this so user cna create one
   const newSnippit = new Snippit({
     title: 'Test',
     code: '<h1>This is a code block</h1>',

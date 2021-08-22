@@ -23,7 +23,7 @@ exports.login = async (req, res, next) => {
         {
           userId: user._id.toString()
         },
-        'supertopsecrettokensecret',
+        process.env.JWT_TOKEN_SECRET,
         { expiresIn: '1h' }
       )
 
