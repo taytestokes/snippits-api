@@ -2,8 +2,14 @@ const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 
-const snippitController = require('./controllers/snippits')
-const authController = require('./controllers/authorization')
+const getAllSnippits = require('./controllers/snippits/getAllSnippits')
+const getSnippit = require('./controllers/snippits/getSnippit')
+const createSnippit = require('./controllers/snippits/createSnippit')
+const updateSnippit = require('./controllers/snippits/updateSnippit')
+const deleteSnippit = require('./controllers/snippits/deleteSnippit')
+
+const register = require('./controllers/auth/register')
+const login = require('./controllers/auth/login')
 
 const isAuthorized = require('./middleware/isAuthorized')
 
@@ -23,14 +29,14 @@ app.use(
 )
 
 // Routes
-app.get('/snippits', isAuthorized, snippitController.getAllSnippits)
-app.get('/snippits/:snippitId', snippitController.getOneSnippit)
-app.post('/snippits', snippitController.createSnippit)
-app.patch('/snippits/:snippitId', snippitController.updateSnippit)
-app.delete('/snippits/:snippitId', snippitController.deleteSnippit)
+app.get('/snippits', isAuthorized, getAllSnippits)
+app.get('/snippits/:snippitId', getSnippit)
+app.post('/snippits', createSnippit)
+app.patch('/snippits/:snippitId', updateSnippit)
+app.delete('/snippits/:snippitId', deleteSnippit)
 
-app.post('/register', authController.register)
-app.post('/login', authController.login)
+app.post('/register', register)
+app.post('/login', login)
 
 // Default Error Handler
 app.use((error, req, res, next) => {
