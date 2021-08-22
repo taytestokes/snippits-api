@@ -31,7 +31,7 @@ app.use(
 // Routes
 app.get('/snippits', isAuthorized, getAllSnippits)
 app.get('/snippits/:snippitId', getSnippit)
-app.post('/snippits', createSnippit)
+app.post('/snippits', isAuthorized, createSnippit)
 app.patch('/snippits/:snippitId', updateSnippit)
 app.delete('/snippits/:snippitId', deleteSnippit)
 

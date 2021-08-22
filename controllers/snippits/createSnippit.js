@@ -1,17 +1,26 @@
 const Snippit = require('../../models/snippit')
 
 module.exports = async (req, res, next) => {
-  // TODO: Update this so user cna create one
-  const newSnippit = new Snippit({
-    title: 'Test',
-    code: '<h1>This is a code block</h1>',
-    language: 'HTML',
-    author: 'Tayte Stokes'
-  })
+  const { title, code, language } = req.body
+  const { userId } = req
 
-  await newSnippit.save()
+  try {
+    const newSnippit = new Snippit({
+      title,
+      code,
+      language,
+      author: userId
+    })
 
-  return res.status(200).json({
-    message: 'New snippit created, yay!'
-  })
+    const savedSnippit = await newSnippit.save()
+
+    if (savedSnippit) {
+      return res.status(200).json({
+        message: 'New snippit created!'
+      })
+    }
+  } catch (error) {
+    error.statusCode = 404
+    next(error)
+  }
 }

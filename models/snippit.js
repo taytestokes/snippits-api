@@ -14,8 +14,10 @@ const SnippitSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    // References User Collection
     author: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
       required: true
     }
   },
