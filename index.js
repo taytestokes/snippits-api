@@ -31,10 +31,10 @@ app.use(
 
 // Routes
 app.get('/snippits', isAuthorized, getAllSnippits)
-app.get('/snippits/:snippitId', getSnippit)
+app.get('/snippits/:snippitId', isAuthorized, getSnippit)
 app.post('/snippits', isAuthorized, createSnippit)
-app.patch('/snippits/:snippitId', updateSnippit)
-app.delete('/snippits/:snippitId', deleteSnippit)
+app.put('/snippits/:snippitId', isAuthorized, updateSnippit)
+app.delete('/snippits/:snippitId', isAuthorized, deleteSnippit)
 
 app.post('/register', register)
 app.post('/login', login)
@@ -52,7 +52,8 @@ app.use((error, req, res, next) => {
 mongoose
   .connect(process.env.DATABASE_CONNECTION, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
   })
   .then(() => {
     app.listen(process.env.PORT)

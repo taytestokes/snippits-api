@@ -1,14 +1,17 @@
 const Snippit = require('models/snippit')
 
 module.exports = async (req, res, next) => {
-  const snippitId = req.params.snippitId
+  const { snippitId } = req.params
+  const { userId } = req
 
-  return Snippit.findById(snippitId)
-    .then((snippit) => {
-      return res.status(200).json({
-        message: `Snippit - ${snippitId} found!`,
-        snippit
-      })
+  try {
+    const snippit = await Snippit.findOne({ _id: snippitId, author: userId })
+
+    return res.status(200).json({
+      message: `Snippit - ${snippitId} found!`,
+      snippit
     })
-    .catch((error) => next(error))
+  } catch (error) {
+    next(error)
+  }
 }
