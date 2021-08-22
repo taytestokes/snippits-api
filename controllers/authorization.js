@@ -21,7 +21,6 @@ exports.login = async (req, res, next) => {
     if (user && isValidPassword) {
       const token = jwt.sign(
         {
-          email: user.email,
           userId: user._id.toString()
         },
         'supertopsecrettokensecret',
@@ -30,16 +29,14 @@ exports.login = async (req, res, next) => {
 
       return res.status(200).json({
         message: 'Login Successful!',
-        userId: user._id.toString(),
         token
       })
     }
   } catch (error) {
-    console.log(error)
+    next(error)
   }
 }
 
-// Register User Into Application
 exports.register = async (req, res, next) => {
   const { email, password } = req.body
 
@@ -63,6 +60,6 @@ exports.register = async (req, res, next) => {
       user: newUser
     })
   } catch (error) {
-    console.log(error)
+    next(error)
   }
 }

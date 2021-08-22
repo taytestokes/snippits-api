@@ -5,6 +5,9 @@ const mongoose = require('mongoose')
 const snippitController = require('./controllers/snippits')
 const authController = require('./controllers/authorization')
 
+const isAuthorized = require('./middleware/isAuthorized')
+
+// API Application Instanciation
 const app = express()
 
 // Middleware
@@ -20,7 +23,7 @@ app.use(
 )
 
 // Routes
-app.get('/snippits', snippitController.getAllSnippits)
+app.get('/snippits', isAuthorized, snippitController.getAllSnippits)
 app.get('/snippits/:snippitId', snippitController.getOneSnippit)
 app.post('/snippits', snippitController.createSnippit)
 app.patch('/snippits/:snippitId', snippitController.updateSnippit)
